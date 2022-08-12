@@ -1,0 +1,83 @@
+{
+    "name": "@subql/contract-sdk",
+    "version": "0.1.1-50",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "build:contract": "waffle waffle.json",
+        "build:types": "yarn typechain --target=ethers-v5 'publish/contracts/*.json' --out-dir './src/typechain' ",
+        "build:ts": "scripts/build.sh",
+        "build": "yarn build:contract && yarn build:types && yarn build:ts",
+        "unit:test": "mocha ./test/*.test.ts  --exit --recursive --parallel",
+        "test": "mocha",
+        "prepare": "husky install",
+        "deploy": "node -r ts-node/register/transpile-only scripts/deploy.ts",
+        "deploy:mainnet": "node -r ts-node/register/transpile-only scripts/deploy.ts --mainnet",
+        "deploy:testnet": "node -r ts-node/register/transpile-only scripts/deploy.ts --testnet",
+        "seed:testnet": "ts-node scripts/seed.ts test/fixtures/testnet.yaml"
+    },
+    "resolutions": {
+        "@polkadot/util-crypto": "8.3.2",
+        "@polkadot/util": "8.3.2",
+        "@polkadot/api-derive": "7.4.1",
+        "@polkadot/api": "7.4.1",
+        "@polkadot/rpc-core": "7.4.1",
+        "@polkadot/rpc-provider": "7.4.1",
+        "@polkadot/types": "7.4.1",
+        "@polkadot/types-known": "7.4.1"
+    },
+    "devDependencies": {
+        "@acala-network/bodhi": "2.2.2",
+        "@acala-network/eth-providers": "2.2.2",
+        "@ethersproject/abstract-provider": "~5.5.1",
+        "@ethersproject/address": "~5.5.0",
+        "@ethersproject/bignumber": "~5.5.0",
+        "@ethersproject/bytes": "~5.5.0",
+        "@ethersproject/contracts": "~5.5.0",
+        "@ethersproject/logger": "~5.5.0",
+        "@ethersproject/networks": "~5.5.2",
+        "@ethersproject/properties": "~5.5.0",
+        "@ethersproject/providers": "~5.5.3",
+        "@ethersproject/transactions": "~5.5.0",
+        "@ethersproject/wallet": "~5.5.0",
+        "@openzeppelin/contracts": "^4.5.0",
+        "@openzeppelin/test-helpers": "^0.5.15",
+        "@typechain/ethers-v5": "9.0.0",
+        "@types/chai": "^4.3.0",
+        "@types/mocha": "^7.0.2",
+        "@types/module-alias": "^2",
+        "@types/prettier": "^2",
+        "@types/sha256": "^0.2.0",
+        "chai": "^4.3.6",
+        "ethereum-waffle": "^3.4.0",
+        "ethers": "~5.5.4",
+        "husky": "^7.0.4",
+        "ipfs-http-client": "^56.0.1",
+        "lint-staged": "^12.3.5",
+        "mocha": "^7.2.0",
+        "module-alias": "^2.2.2",
+        "prettier": "^2.5.1",
+        "prettier-plugin-solidity": "^1.0.0-beta.19",
+        "sha256": "^0.2.0",
+        "ts-node": "^10.6.0",
+        "typechain": "7.0.0",
+        "typescript": "^4.4.2"
+    },
+    "dependencies": {
+        "@openzeppelin/contracts-upgradeable": "^4.5.2",
+        "dotenv": "^10.0.0",
+        "fs": "^0.0.1-security"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "prettier --write"
+        ],
+        "src/*.ts": [
+            "prettier --write"
+        ],
+        "contracts/**/*.sol": [
+            "prettier --write"
+        ]
+    },
+    "stableVersion": "0.1.0"
+}
